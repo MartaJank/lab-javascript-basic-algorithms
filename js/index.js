@@ -12,20 +12,32 @@ console.log(`The navigator’s name is ${hacker2}`);
 
 if (hacker1.length > hacker2.length) {
   console.log(`The driver has the longest name, it has ${hacker1.length} characters.`)
-} else if (hacker1.length < hacker2.length) {
-  console.log(`It seems that the navigator has the longest name, it has ${hacker2.length} characters.`)
-} else {
-  console.log(`Wow, you both have equally long names, ${hacker2.length} characters!`)
+  } else if (hacker1.length < hacker2.length) {
+      console.log(`It seems that the navigator has the longest name, it has ${hacker2.length} characters.`)
+  } else {
+      console.log(`Wow, you both have equally long names, ${hacker2.length} characters!`)
 }
 
 // iteration 3 - Loops
 
-let withSpaces = ''
+let withLastSpace = ''
 let upperCasedDriver = hacker1.toUpperCase();
+
 for(let i = 0; i < upperCasedDriver.length; i++){
-   withSpaces += upperCasedDriver.charAt(i) + ' ';
+   withLastSpace += upperCasedDriver.charAt(i) + ' ';
 };
+
+let withSpaces = withLastSpace.slice(0, -1)
+
 console.log(withSpaces);
+
+/* That was a solution using loop, it would be easier anyway to use just this:
+
+let upperCasedDriver = hacker1.toUpperCase();
+let withSpaces = upperCasedDriver.split('').join(' ')
+
+console.log(withSpaces);
+*/
 
 let reversedString = ''
 for(let x = hacker2.length - 1; x >= 0; x--) {
@@ -56,16 +68,31 @@ function WordCount(lorem) {
 console.log(WordCount(lorem));
 
 function wordSearch(lorem) {
-  return lorem.split("et").length;
+  return lorem.split(" et ").length;
 }
 
 console.log(wordSearch(lorem));
 
-let phraseReverse = ''
-let phraseToCheck = "amor roma"
+const punctuationAndSpace = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ ';
+
+let phraseReverse = '';
+let rawPhrase = "A man, a plan, a canal, Panama!";
+let rawLetters = rawPhrase.split('');
+let cleanLetters = rawLetters.filter(function(letter) {
+  return punctuationAndSpace.indexOf(letter) === -1;
+});
+
+var phraseToCheck = cleanLetters.join('').toLowerCase();
+
+console.log(phraseToCheck)
+
+
 for(let j = phraseToCheck.length - 1; j >= 0; j--) {
 	phraseReverse = phraseReverse + phraseToCheck[j];
+}
+
 if (phraseToCheck === phraseReverse) {
  console.log("It's a Palindrome")
-}
+} else {
+  console.log("Not a Palindrome")
 }
